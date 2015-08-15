@@ -1,0 +1,2 @@
+class Kiik
+end
