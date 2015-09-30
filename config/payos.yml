@@ -1,0 +1,9 @@
+development:
+  host: https://localhost:8800
+  version:  0.1
+staging:
+  host: https://demo.kiik.com
+  version:  0.1
+production:
+  host: https://api.kiik.com
+  version: 0.1

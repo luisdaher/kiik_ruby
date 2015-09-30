@@ -1,7 +1,10 @@
-# Version
-require 'kiik/version'
+require 'yaml'
 
 module Kiik
-  @api_base = 'https://api.kiik.com'
+  path = File.expand_path('../../config/payos.yml', __FILE__)
+  config = YAML.load_file(path)
+  env = ENV['PAYOS_ENV'] || 'development'
 
+  @host = config[env]['host']
+  @version = config[env]['version']
 end
