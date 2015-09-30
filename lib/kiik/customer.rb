@@ -1,4 +1,6 @@
 module Kiik
-  class Customer
+  class Customer < Resource
+    include Kiik::Rest::Create
+
   end
 end
