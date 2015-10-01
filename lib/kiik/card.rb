@@ -1,5 +1,5 @@
 module Kiik
-  class Card
+  class Card < Resource
     include Kiik::Rest::Create
   end
 end

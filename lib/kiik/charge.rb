@@ -1,5 +1,5 @@
 module Kiik
-  class Charge
+  class Charge < Resource
     include Kiik::Rest::Create
   end
 end
