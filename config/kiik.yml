@@ -1,0 +1,12 @@
+development:
+  api_key:  payos_kiik
+  host:     http://localhost:8800
+  version:  0.1.0
+staging:
+  api_key:  B31DCE74-E768-43ED-86DA-85501612548F
+  host:     https://demo.kiik.com
+  version:  0.1.0
+production:
+  api_key:  B31DCE74-E768-43ED-86DA-85501612548F
+  host:     https://api.kiik.com
+  version:  0.1.0
