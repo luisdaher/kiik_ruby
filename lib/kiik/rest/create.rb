@@ -12,7 +12,7 @@ module Kiik
           begin
             create(params)
           rescue KiikError => e
-            build({}, e)
+            build(params, e)
           rescue Error => e
             e
           end
