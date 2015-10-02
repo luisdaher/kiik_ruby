@@ -23,7 +23,7 @@ For create this file in your project use task:
 
 `rake kiik:config`
 
-Dont forgete change `api_key` to your key
+Don't forget to change `api_key` to your key
 
 ### Use ###
 
