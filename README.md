@@ -28,6 +28,6 @@ Dont forgete change `api_key` to your key
 ### Use ###
 
 ```ruby
-    #Create customer
-    customer = Kiik::Customer.create({name: "User name", email: "user@email.com"})
+#Create customer
+customer = Kiik::Customer.create({name: "User name", email: "user@email.com"})
 ```
