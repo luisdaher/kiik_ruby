@@ -10,7 +10,7 @@ module Kiik
     end
 
     def to_json
-      super().merge!({
+      super.merge!(
         phone: @phone,
         name: @name,
         document: @document,
@@ -18,7 +18,7 @@ module Kiik
         metadata: @metadata,
         description: @description,
         cards: @cards
-      })
+      )
     end
   end
 end
