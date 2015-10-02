@@ -8,7 +8,7 @@ namespace :kiik do
       FileUtils.cp src, dst
       puts "Config file created"
     else
-      puts "Config file ready exists"
+      puts "Config file already exists"
     end
   end
 end
