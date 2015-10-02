@@ -31,14 +31,6 @@ module Kiik
             raise Error.new(response.message)
           end
         end
-
-        def build(data, error = nil)
-          instance = self.new(data)
-          unless error.nil?
-            instance.errors = error.errors
-          end
-          instance
-        end
       end
     end
   end

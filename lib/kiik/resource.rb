@@ -16,6 +16,14 @@ module Kiik
       def opts
         {basic_auth: {username: Kiik.api_key, password: ''}, headers: {"Accept-Version" => Kiik.version}}
       end
+
+      def build(data, error = nil)
+        instance = self.new(data)
+        unless error.nil?
+          instance.errors = error.errors
+        end
+        instance
+      end
     end
 
     def initialize(attributes = {})
