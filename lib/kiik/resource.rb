@@ -2,9 +2,7 @@ module Kiik
   class Resource
     include HTTParty
 
-    attr_accessor :id, :created
-
-    @errors = []
+    attr_accessor :id, :created, :errors
 
     class << self
       def class_name
@@ -16,30 +14,38 @@ module Kiik
       end
 
       def opts
-        {basic_auth: {username: Kiik.api_key, password: ''}, headers: {"Accept-Version" => Kiik.version}}
+        {
+          basic_auth: {username: Kiik.api_key, password: ''},
+          headers: {
+            "Accept-Version" => Kiik.version,
+            "Content-Type" => 'application/json'
+          }
+        }
       end
 
       def build(data, error = nil)
         instance = self.new(data)
-        instance.set_errors(error.errors) unless error.nil?
+        instance.errors = error.errors unless error.nil?
         instance
       end
     end
 
     def initialize(attributes = {})
       attributes.each{ |name, value| self.instance_variable_set("@#{name}", value) }
+      self.errors = []
     end
 
     def valid?
-      @errors.empty?
+      self.errors.empty?
     end
 
-    def set_errors(errors = [])
-      @errors = errors
-    end
-
-    def to_json
-      {id: @id, created: @created}
+    def to_json(attrs = [:id, :created])
+      result = {}
+      attrs.each{ |attr|
+        value = self.instance_variable_get("@#{attr}")
+        result[attr] = value unless value.nil? or value.empty?
+      }
+      result
     end
   end
 end
