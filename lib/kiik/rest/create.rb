@@ -25,10 +25,8 @@ module Kiik
         end
 
         def request(params)
-          options = opts.merge!({:body => params})
-          puts "Requet", url, options
+          options = opts.merge!({:body => JSON.generate(params)})
           response = post url, options
-          puts "Responde", response.inspect
           response.body
           case response.code
           when 200
@@ -45,11 +43,10 @@ module Kiik
         created = false
         result = self.class.request(self.to_json)
         if result.instance_of? KiikError
-          @errors = result.errors
+          self.errors = result.errors
         elsif result.instance_of? StandardError
           raise result
         else
-          @errors = []
           initialize(result.to_json)
           created = true
         end
