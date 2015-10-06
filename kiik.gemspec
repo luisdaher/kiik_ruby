@@ -14,6 +14,7 @@ spec = Gem::Specification.new do |s|
   s.add_development_dependency('shoulda', '~> 3.5')
   s.add_development_dependency('test-unit', '~> 3.1')
   s.add_development_dependency('rake', '~> 10.4')
+  s.add_development_dependency('webmock', '~> 1.21.0')
 
   s.files = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- test/*`.split("\n")

@@ -12,33 +12,45 @@ module Kiik
           begin
             create(params)
           rescue KiikError => e
-            build({}, e)
-          rescue Error => e
+            build(params, e)
+          rescue StandardError => e
             e
           end
         end
 
         def create(params={})
-          options = opts.merge!({:body => params})
+          result = request(params)
+          raise result if result.instance_of? StandardError or result.instance_of? KiikError
+          result
+        end
+
+        def request(params)
+          options = opts.merge!({:body => JSON.generate(params)})
           response = post url, options
           response.body
           case response.code
           when 200
             build(JSON.parse(response.body))
           when 422
-            raise KiikError.new(JSON.parse(response.body))
+            KiikError.new(JSON.parse(response.body))
           else
-            raise Error.new(response.message)
+            StandardError.new(response.message)
           end
         end
+      end
 
-        def build(data, error = nil)
-          instance = self.new(data)
-          unless error.nil?
-            instance.errors = error.errors
-          end
-          instance
+      def create
+        created = false
+        result = self.class.request(self.to_json)
+        if result.instance_of? KiikError
+          self.errors = result.errors
+        elsif result.instance_of? StandardError
+          raise result
+        else
+          initialize(result.to_json)
+          created = true
         end
+        created
       end
     end
   end
