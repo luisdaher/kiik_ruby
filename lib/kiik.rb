@@ -19,7 +19,7 @@ module Kiik
   end
 
   config = YAML.load_file(path)
-  env = ENV['PAYOS_ENV'] || 'development'
+  env = ENV['KIIK_ENV'] || 'development'
 
   @host = config[env]['host']
   @version = config[env]['version']
