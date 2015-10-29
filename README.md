@@ -35,3 +35,4 @@ customer = Kiik::Customer.create({name: "User name", email: "user@email.com"})
 ### Production
 
 For production env, don't forget to set `KIIK_ENV` to `production`, that way, our gem will read the `kiik.yml` file corretly.
+
