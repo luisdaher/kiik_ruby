@@ -42,13 +42,6 @@ module Kiik
           end
         end
 
-        # def log_response(response)
-        #   # TODO: Check for env that is not only rails specific
-        #   puts 'LOG from KIIK =============='
-        #   puts "Status: #{response.code}"
-        #   puts "Body: #{response.body}"
-        #   puts '============================'
-        # end
       end
 
       def create
