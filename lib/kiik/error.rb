@@ -1,8 +1,8 @@
 module Kiik
   class KiikError < StandardError
     attr_reader :errors
-    def initialize(body)
-      @errors = [{attr: body['error']['param'], message: body['error']['message']}]
+    def initialize(body = nil)
+      @errors = body.nil? ? [] : [{attr: body['error']['param'], message: body['error']['message']}]
     end
 
     def to_s

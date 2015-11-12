@@ -28,5 +28,4 @@ module Kiik
   class << self
     attr_accessor :api_key, :host, :version
   end
-
 end

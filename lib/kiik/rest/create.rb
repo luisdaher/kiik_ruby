@@ -20,23 +20,28 @@ module Kiik
 
         def create(params={})
           result = request(params)
-          raise result if result.instance_of? StandardError or result.instance_of? KiikError
+          raise result if result.instance_of? StandardError
           result
         end
 
         def request(params)
           options = opts.merge!({:body => JSON.generate(params)})
-          response = post url, options
+          response = post(url, options)
           response.body
           case response.code
           when 200
             build(JSON.parse(response.body))
+          when 402
+            result = KiikError.new
+            result.errors << ({attr: 'status', message: 'recused'})
+            build(JSON.parse(response.body), result)
           when 422
             KiikError.new(JSON.parse(response.body))
           else
             StandardError.new(response.message)
           end
         end
+
       end
 
       def create
