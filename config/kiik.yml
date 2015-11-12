@@ -1,5 +1,5 @@
 development:
-  api_key:  payos_kiik
+  api_key:  payos_test
   host:     http://localhost:8800
   version:  0.3
 staging:

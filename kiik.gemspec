@@ -11,6 +11,7 @@ spec = Gem::Specification.new do |s|
   s.license = 'MIT'
 
   s.add_development_dependency('mocha', '~> 0.13')
+  s.add_development_dependency('pry', '~> 0.10.3')
   s.add_development_dependency('shoulda', '~> 3.5')
   s.add_development_dependency('test-unit', '~> 3.1')
   s.add_development_dependency('rake', '~> 10.4')

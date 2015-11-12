@@ -20,23 +20,36 @@ module Kiik
 
         def create(params={})
           result = request(params)
-          raise result if result.instance_of? StandardError or result.instance_of? KiikError
+          raise result if result.instance_of? StandardError
           result
         end
 
         def request(params)
           options = opts.merge!({:body => JSON.generate(params)})
-          response = post url, options
+          response = post(url, options)
+          log_response(response)
           response.body
           case response.code
           when 200
             build(JSON.parse(response.body))
+          when 402
+            result = KiikError.new
+            result.errors << ({attr: 'status', message: 'recused'})
+            build(JSON.parse(response.body), result)
           when 422
             KiikError.new(JSON.parse(response.body))
           else
             StandardError.new(response.message)
           end
         end
+
+        # def log_response(response)
+        #   # TODO: Check for env that is not only rails specific
+        #   puts 'LOG from KIIK =============='
+        #   puts "Status: #{response.code}"
+        #   puts "Body: #{response.body}"
+        #   puts '============================'
+        # end
       end
 
       def create
