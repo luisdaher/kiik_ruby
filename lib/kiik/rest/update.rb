@@ -19,18 +19,19 @@ module Kiik
         end
 
         def update(params={})
-          result = request(params)
+          result = request_update(params)
           raise result if result.instance_of? StandardError or result.instance_of? KiikError
           result
         end
 
-        def request(params)
-          options = opts.merge!({:body => JSON.generate(params)})
-          response = put url + "/" + params['id'], options
-          response.body
+        def request_update(params)
+          options = opts.merge!(body: JSON.generate(params))
+          response = put(url + "/" + params['id'], options)
           case response.code
           when 200
+            $stdout.puts "BATEU  DO BUILD"
             build(JSON.parse(response.body))
+            $stdout.puts "BATEU DEPOIS DO BUILD"
           when 422
             KiikError.new(JSON.parse(response.body))
           else
@@ -41,7 +42,7 @@ module Kiik
 
       def updated
         updated = false
-        result = self.class.request(self.to_json)
+        result = self.class.request_update(self.to_json)
         if result.instance_of? KiikError
           self.errors = result.errors
         elsif result.instance_of? StandardError
