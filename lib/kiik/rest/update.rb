@@ -29,9 +29,7 @@ module Kiik
           response = put(url + "/" + params['id'], options)
           case response.code
           when 200
-            $stdout.puts "BATEU  DO BUILD"
             build(JSON.parse(response.body))
-            $stdout.puts "BATEU DEPOIS DO BUILD"
           when 422
             KiikError.new(JSON.parse(response.body))
           else
