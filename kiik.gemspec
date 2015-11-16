@@ -2,7 +2,7 @@ $:.unshift(File.join(File.dirname(__FILE__), 'lib'))
 
 spec = Gem::Specification.new do |s|
   s.name = 'kiik'
-  s.version = '0.0.3'
+  s.version = '0.1.3'
   s.summary = 'Integrate Kiik with your Ruby app'
   s.description = "KiiK's official gem that helps you to integrate with our services. See https://docs.kiik.com.br for details."
   s.authors = ['Julien Lucca', 'Esdras Eduardo']
