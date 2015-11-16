@@ -2,6 +2,7 @@ require 'yaml'
 require 'httparty'
 
 require 'kiik/rest/create'
+require 'kiik/rest/update'
 require 'kiik/util'
 require 'kiik/resource'
 require 'kiik/card'
