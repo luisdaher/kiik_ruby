@@ -1,6 +1,7 @@
 module Kiik
   class Customer < Resource
     include Kiik::Rest::Create
+    include Kiik::Rest::Update
 
     attr_accessor :phone, :name, :document, :email, :metadata, :description, :cards
 

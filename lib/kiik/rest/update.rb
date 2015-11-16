@@ -26,7 +26,7 @@ module Kiik
 
         def request(params)
           options = opts.merge!({:body => JSON.generate(params)})
-          response = post url + "/" + params[:id], options
+          response = put url + "/" + params['id'], options
           response.body
           case response.code
           when 200
