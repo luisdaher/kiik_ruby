@@ -36,7 +36,7 @@ module Kiik
         end
 
         def update(params={id: 0})
-          result = request(params[:id], params, 'PUT')
+          result = request(params[:id], params, :PUT)
           raise result if result.kind_of? StandardError
           result
         end

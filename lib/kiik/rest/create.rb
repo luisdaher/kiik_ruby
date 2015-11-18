@@ -36,7 +36,7 @@ module Kiik
         end
 
         def create(params={})
-          result = request(nil, params, 'POST')
+          result = request(nil, params, :POST)
           raise result if result.kind_of? StandardError
           result
         end
