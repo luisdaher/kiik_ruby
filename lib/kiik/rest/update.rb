@@ -2,12 +2,29 @@ module Kiik
   module Rest
     module Update
       class << self
+        
         def included(base)
           base.extend(ClassMethods)
         end
+
+      end
+
+      def update
+        updated = false
+        result = self.class.update(self.to_json)
+        if result.instance_of? KiikError
+          self.errors = result.errors
+        elsif result.instance_of? StandardError
+          raise result
+        else
+          initialize(result.to_json)
+          updated = true
+        end
+        updated
       end
 
       module ClassMethods
+
         def update!(params={})
           begin
             update(params)
@@ -19,38 +36,13 @@ module Kiik
         end
 
         def update(params={})
-          result = request_update(params)
-          raise result if result.instance_of? StandardError or result.instance_of? KiikError
+          raise StandardError.new "Update need id" if params['id'].nil?
+          result = request(params['id'], params, 'PUT')
+          raise result if result.kind_of? StandardError
           result
         end
-
-        def request_update(params)
-          options = opts.merge!(body: JSON.generate(params))
-          response = put(url + "/" + params['id'], options)
-          case response.code
-          when 200
-            build(JSON.parse(response.body))
-          when 422
-            KiikError.new(JSON.parse(response.body))
-          else
-            StandardError.new(response.message)
-          end
-        end
       end
-
-      def updated
-        updated = false
-        result = self.class.request_update(self.to_json)
-        if result.instance_of? KiikError
-          self.errors = result.errors
-        elsif result.instance_of? StandardError
-          raise result
-        else
-          initialize(result.to_json)
-          updated = true
-        end
-        updated
-      end
+      
     end
   end
 end

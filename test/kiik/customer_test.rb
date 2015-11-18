@@ -42,5 +42,13 @@ module Kiik
       customer.create
       assert customer.valid?
     end
+
+    should "raise exception for update empty customer" do
+      exception = assert_raise StandardError do
+        Kiik::Customer.update
+      end
+      assert_equal(exception.message, "Update need id")
+    end
+
   end
 end

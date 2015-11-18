@@ -5,6 +5,7 @@ module Kiik
     attr_accessor :id, :created, :errors
 
     class << self
+
       def class_name
         self.name.split('::')[-1]
       end
@@ -28,6 +29,39 @@ module Kiik
         instance.errors = error.errors unless error.nil?
         instance
       end
+
+      def request(path=nil, params={}, method='GET')
+        puts path
+        puts params
+        puts method
+        options = opts.merge!(body: JSON.generate(params))
+        url_abs = path.nil? ? url : "#{url}/#{path}"
+        case method.upcase
+        when "GET"
+          response = get(url_abs, options)
+        when "POST"
+          response = post(url_abs, options)
+        when "PUT"
+          response = put(url_abs, options)
+        else
+          StandardError.new("Method #{method} not implemented")
+        end
+
+        case response.code
+        when 200
+          build(JSON.parse(response.body))
+        when 402
+          result = KiikError.new
+          build(JSON.parse(response.body), result)
+        when 404
+          #TODO NOT FOUND
+        when 422
+          KiikError.new(JSON.parse(response.body))
+        else
+          StandardError.new(response.message)
+        end
+      end
+
     end
 
     def initialize(attributes = {})
