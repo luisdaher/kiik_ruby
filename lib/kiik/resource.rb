@@ -31,9 +31,6 @@ module Kiik
       end
 
       def request(path=nil, params={}, method='GET')
-        puts path
-        puts params
-        puts method
         options = opts.merge!(body: JSON.generate(params))
         url_abs = path.nil? ? url : "#{url}/#{path}"
         case method.upcase
@@ -50,13 +47,11 @@ module Kiik
         case response.code
         when 200
           build(JSON.parse(response.body))
-        when 402
-          result = KiikError.new
-          build(JSON.parse(response.body), result)
         when 404
-          #TODO NOT FOUND
         when 422
-          KiikError.new(JSON.parse(response.body))
+          result = JSON.parse(response.body)
+          result["error"]["param"] = "id" unless result["error"]["param"]
+          KiikError.new(result)
         else
           StandardError.new(response.message)
         end
