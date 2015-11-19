@@ -41,19 +41,18 @@ module Kiik
         when :PUT
           response = put(url_abs, options)
         else
-          StandardError.new("Method #{method} not implemented")
+          raise StandardError.new("Method #{method} not implemented")
         end
 
         case response.code
         when 200
           build(JSON.parse(response.body))
-        when 404
-        when 422
+        when 422, 404
           result = JSON.parse(response.body)
           result["error"]["param"] = "id" unless result["error"]["param"]
           KiikError.new(result)
         else
-          StandardError.new(response.message)
+          raise StandardError.new(response.message)
         end
       end
 

@@ -2,11 +2,11 @@ module Kiik
   module Rest
     module Create
       class << self
-        
+
         def included(base)
           base.extend(ClassMethods)
         end
-        
+
       end
 
       def create
