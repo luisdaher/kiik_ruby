@@ -33,13 +33,14 @@ module Kiik
       def request(path=nil, params={}, method=:GET)
         options = opts.merge!(body: JSON.generate(params))
         url_abs = path.nil? ? url : "#{url}/#{path}"
-        case method
+
+        response = case method
         when :GET
-          response = get(url_abs, options)
+          get(url_abs, options)
         when :POST
-          response = post(url_abs, options)
+          post(url_abs, options)
         when :PUT
-          response = put(url_abs, options)
+          put(url_abs, options)
         else
           raise StandardError.new("Method #{method} not implemented")
         end
