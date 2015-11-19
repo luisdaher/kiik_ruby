@@ -66,7 +66,6 @@ module Kiik
       customer_send = {id: 1, name:"New name"}
       put(customer_data[:id], customer_send, customer_data)
       customer = Kiik::Customer.update! customer_send
-      puts customer.inspect
       assert_equal customer.name, customer_data[:name]
       assert_equal customer.email, customer_data[:email]
     end
