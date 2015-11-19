@@ -10,17 +10,16 @@ module Kiik
       end
 
       def create
-        created = false
         result = self.class.create(self.to_json)
+        raise result if result.instance_of? StandardError
+
         if result.instance_of? KiikError
           self.errors = result.errors
-        elsif result.instance_of? StandardError
-          raise result
-        else
-          initialize(result.to_json)
-          created = true
+          return false
         end
-        created
+
+        initialize(result.to_json)
+        true
       end
 
       module ClassMethods

@@ -10,17 +10,16 @@ module Kiik
       end
 
       def update
-        updated = false
         result = self.class.update(self.to_json)
+        raise result if result.instance_of? StandardError
+
         if result.instance_of? KiikError
           self.errors = result.errors
-        elsif result.instance_of? StandardError
-          raise result
-        else
-          initialize(result.to_json)
-          updated = true
+          return false
         end
-        updated
+
+        initialize(result.to_json)
+        true
       end
 
       module ClassMethods
