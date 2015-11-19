@@ -2,7 +2,7 @@ module Kiik
   module Rest
     module Update
       class << self
-        
+
         def included(base)
           base.extend(ClassMethods)
         end
@@ -31,7 +31,7 @@ module Kiik
           rescue KiikError => e
             build(params, e)
           rescue StandardError => e
-            e
+            raise e
           end
         end
 
@@ -41,7 +41,7 @@ module Kiik
           result
         end
       end
-      
+
     end
   end
 end
