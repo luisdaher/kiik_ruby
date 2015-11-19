@@ -2,12 +2,28 @@ module Kiik
   module Rest
     module Create
       class << self
+
         def included(base)
           base.extend(ClassMethods)
         end
+
+      end
+
+      def create
+        result = self.class.create(self.to_json)
+        raise result if result.instance_of? StandardError
+
+        if result.instance_of? KiikError
+          self.errors = result.errors
+          return false
+        end
+
+        initialize(result.to_json)
+        true
       end
 
       module ClassMethods
+
         def create!(params={})
           begin
             create(params)
@@ -19,43 +35,12 @@ module Kiik
         end
 
         def create(params={})
-          result = request_create(params)
-          raise result if result.instance_of? StandardError
+          result = request(nil, params, :POST)
+          raise result if result.kind_of? StandardError
           result
         end
-
-        def request_create(params)
-          options = opts.merge!(body: JSON.generate(params))
-          response = post(url, options)
-          case response.code
-          when 200
-            build(JSON.parse(response.body))
-          when 402
-            result = KiikError.new
-            result.errors << ({attr: 'status', message: 'recused'})
-            build(JSON.parse(response.body), result)
-          when 422
-            KiikError.new(JSON.parse(response.body))
-          else
-            StandardError.new(response.message)
-          end
-        end
-
       end
 
-      def create
-        created = false
-        result = self.class.request_create(self.to_json)
-        if result.instance_of? KiikError
-          self.errors = result.errors
-        elsif result.instance_of? StandardError
-          raise result
-        else
-          initialize(result.to_json)
-          created = true
-        end
-        created
-      end
     end
   end
 end
