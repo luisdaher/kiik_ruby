@@ -35,15 +35,15 @@ module Kiik
         url_abs = path.nil? ? url : "#{url}/#{path}"
 
         response = case method
-        when :GET
-          get(url_abs, options)
-        when :POST
-          post(url_abs, options)
-        when :PUT
-          put(url_abs, options)
-        else
-          raise StandardError.new("Method #{method} not implemented")
-        end
+                   when :GET
+                     get(url_abs, options)
+                   when :POST
+                     post(url_abs, options)
+                   when :PUT
+                     put(url_abs, options)
+                   else
+                     raise StandardError.new("Method #{method} not implemented")
+                   end
 
         case response.code
         when 200
