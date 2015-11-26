@@ -50,7 +50,6 @@ module Kiik
           build(JSON.parse(response.body))
         when 422, 404
           result = JSON.parse(response.body)
-          result["error"]["param"] = "id" unless result["error"]["param"]
           KiikError.new(result)
         else
           raise StandardError.new(response.message)

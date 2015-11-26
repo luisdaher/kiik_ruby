@@ -4,7 +4,7 @@ module Kiik
   class CustomerTest < Test::Unit::TestCase
 
     should "raise exception for create empty customer" do
-      respond = {error: {type:"invalid_request_error", param:"name", message:"Param name is required"}}
+      respond = {errors: [{type:"invalid_request_error", param:"name", message:"Param name is required"}]}
       post({}, respond, 422)
       assert_raise KiikError do
         Kiik::Customer.create
@@ -12,7 +12,7 @@ module Kiik
     end
 
     should "return invalid customer for create! empty customer" do
-      respond = {error: {type:"invalid_request_error", param:"name", message:"Param name is required"}}
+      respond = {errors: [{type:"invalid_request_error", param:"name", message:"Param name is required"}]}
       post({}, respond, 422)
       customer = Kiik::Customer.create!
       assert !customer.valid?
@@ -45,7 +45,7 @@ module Kiik
     end
 
     should "raise exception for update with customer doesn't exists, code 404" do
-      error = {error: {type:"invalid_request_error", message:"Customer doesn't exists"}}
+      error = {errors: [{type:"invalid_request_error", message:"Customer doesn't exists"}]}
       put(0, {}, error, 422)
       assert_raise KiikError do
         Kiik::Customer.update
@@ -53,11 +53,10 @@ module Kiik
     end
 
     should "return invalid customer for update! empty customer" do
-      error = {error: {type:"invalid_request_error", message:"Customer doesn't exists"}}
+      error = {errors: [{type:"invalid_request_error", message:"Customer doesn't exists"}]}
       put(0, {}, error, 422)
       customer = Kiik::Customer.update!
       assert !customer.valid?
-      assert_equal customer.errors.first[:attr], "id"
       assert_equal customer.errors.first[:message], "Customer doesn't exists"
     end
 
