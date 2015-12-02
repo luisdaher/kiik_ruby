@@ -24,9 +24,9 @@ module Kiik
 
       module ClassMethods
 
-        def update!(params={id: 0})
+        def update!(params={id: 0}, header={})
           begin
-            update(params)
+            update(params, header)
           rescue KiikError => e
             build(params, e)
           rescue StandardError => e
@@ -34,8 +34,8 @@ module Kiik
           end
         end
 
-        def update(params={id: 0})
-          result = request(params[:id], params, :PUT)
+        def update(params={id: 0}, header={})
+          result = request(params[:id], params, :PUT, header)
           raise result if result.kind_of? StandardError
           result
         end
