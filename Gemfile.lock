@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kiik (0.1.6)
+    kiik (0.1.7)
 
 GEM
   remote: https://rubygems.org/
