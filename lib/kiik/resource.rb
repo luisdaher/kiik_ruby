@@ -14,13 +14,13 @@ module Kiik
         "#{Kiik.host}/#{Kiik::Util.underscore(class_name)}s"
       end
 
-      def opts
+      def opts(headers={})
         {
           basic_auth: {username: Kiik.api_key, password: ''},
           headers: {
             "Accept-Version" => Kiik.version,
             "Content-Type" => 'application/json'
-          }
+          }.merge(headers)
         }
       end
 
@@ -30,8 +30,8 @@ module Kiik
         instance
       end
 
-      def request(path=nil, params={}, method=:GET)
-        options = opts.merge!(body: JSON.generate(params))
+      def request(path=nil, params={}, method=:GET, header={})
+        options = opts(header).merge(body: JSON.generate(params))
         url_abs = path.nil? ? url : "#{url}/#{path}"
 
         response = case method

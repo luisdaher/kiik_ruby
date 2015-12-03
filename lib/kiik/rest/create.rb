@@ -24,9 +24,9 @@ module Kiik
 
       module ClassMethods
 
-        def create!(params={})
+        def create!(params={}, header={})
           begin
-            create(params)
+            create(params, header)
           rescue KiikError => e
             build(params, e)
           rescue StandardError => e
@@ -34,8 +34,8 @@ module Kiik
           end
         end
 
-        def create(params={})
-          result = request(nil, params, :POST)
+        def create(params={}, header={})
+          result = request(nil, params, :POST, header)
           raise result if result.kind_of? StandardError
           result
         end
