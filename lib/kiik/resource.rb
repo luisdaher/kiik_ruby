@@ -46,7 +46,7 @@ module Kiik
                    end
 
         case response.code
-        when 200
+        when 200, 402
           build(JSON.parse(response.body))
         when 422, 404
           result = JSON.parse(response.body)
