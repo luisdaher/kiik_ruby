@@ -3,7 +3,7 @@ module Kiik
     include Kiik::Rest::Create
     include Kiik::Rest::Update
 
-    attr_accessor :customer_id, :name, :number, :month, :year, :cvc, :card_alias, :cvc_check
+    attr_accessor :customer_id, :name, :number, :month, :year, :cvc, :card_alias, :cvc_check, :default
 
     class << self
 
