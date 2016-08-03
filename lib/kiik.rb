@@ -3,12 +3,15 @@ require 'httparty'
 
 require 'kiik/rest/create'
 require 'kiik/rest/update'
+require 'kiik/rest/get_all'
 require 'kiik/util'
 require 'kiik/resource'
 require 'kiik/card'
 require 'kiik/customer'
 require 'kiik/charge'
+require 'kiik/compensation'
 require 'kiik/error'
+require 'kiik/paginated'
 
 module Kiik
   relative_config = '../config/kiik.yml'
