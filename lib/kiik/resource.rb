@@ -25,7 +25,11 @@ module Kiik
       end
 
       def build(data, error = nil)
-        instance = self.new(data)
+        if data.is_a? Array
+          instance = data.map { |element| self.new(element) }
+        else
+          instance = self.new(data)
+        end
         instance.errors = error.errors unless error.nil?
         instance
       end
