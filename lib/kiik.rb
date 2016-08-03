@@ -11,6 +11,7 @@ require 'kiik/customer'
 require 'kiik/charge'
 require 'kiik/compensation'
 require 'kiik/error'
+require 'kiik/paginated'
 
 module Kiik
   relative_config = '../config/kiik.yml'

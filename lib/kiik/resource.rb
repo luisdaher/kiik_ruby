@@ -25,8 +25,10 @@ module Kiik
       end
 
       def build(data, error = nil)
-        if data.is_a? Array
-          instance = data.map { |element| self.new(element) }
+        if data['result'] && data['total']
+          instance = Kiik::Paginated.new()
+          instance.result = data['result'].map { |element| self.new(element) }
+          instance.total = data['total']
         else
           instance = self.new(data)
         end
