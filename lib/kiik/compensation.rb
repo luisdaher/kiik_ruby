@@ -20,12 +20,12 @@ module Kiik
 
       def all(params = {})
         url = params[:customer].nil? ? '' : "#{params[:customer]}/"
-        params = []
-        params << "start_date=#{params[:start_date].strftime('%Y-%m-%d %H:%M:%S')}" if params[:start_date]
-        params << "end_date=#{params[:end_date].strftime('%Y-%m-%d %H:%M:%S')}" if params[:end_date]
-        params << "page=#{params[:page]}" if params[:page]
-        params << "page_size=#{params[:page_size]}" if params[:page_size]
-        url += "?#{params.join('&')}" if params.length
+        parameters = []
+        parameters << "start_date=#{params[:start_date].to_s(:db)}" if params[:start_date]
+        parameters << "end_date=#{params[:end_date].to_s(:db)}" if params[:end_date]
+        parameters << "page=#{params[:page]}" if params[:page]
+        parameters << "page_size=#{params[:page_size]}" if params[:page_size]
+        url += "?#{parameters.join('&')}" if parameters.length
         result = request(url, {}, :GET, {})
         raise result if result.kind_of? StandardError
         result
