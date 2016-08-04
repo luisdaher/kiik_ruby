@@ -17,6 +17,19 @@ module Kiik
         raise result if result.kind_of? StandardError
         result.total
       end
+
+      def all(params = {})
+        url = params[:customer].nil? ? '' : "#{params[:customer]}/"
+        params = []
+        params << "start_date=#{params[:start_date].strftime('%Y-%m-%d %H:%M:%S')}" if params[:start_date]
+        params << "end_date=#{params[:end_date].strftime('%Y-%m-%d %H:%M:%S')}" if params[:end_date]
+        params << "page=#{params[:page]}" if params[:page]
+        params << "page=#{params[:page_size]}" if params[:page_size]
+        url += "?#{params.join('&')}" if params.length
+        result = request(url, {}, :GET, {})
+        raise result if result.kind_of? StandardError
+        result
+      end
     end
 
     def initialize(attributes = {})
