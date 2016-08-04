@@ -7,8 +7,8 @@ module Kiik
 
     class << self
       def consolidate(customer = nil, start_date = nil, end_date = nil)
-        url = "consolidate"
-        url += "/#{customer}" if customer
+        url = customer.nil? ? '' : "/#{customer}"
+        url += "/consolidate"
         params = []
         params << "start_date=#{start_date}" if start_date
         params << "end_date=#{end_date}" if end_date
