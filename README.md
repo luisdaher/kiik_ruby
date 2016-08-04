@@ -1,4 +1,4 @@
-# KiiK Ruby [![Codeship Status for kiik-payments/kiik_ruby](https://codeship.com/projects/893b1600-608e-0133-73dd-7258394f756c/status?branch=master)](https://codeship.com/projects/112216) [![Inline docs](http://inch-ci.org/github/kiik-payments/kiik-ruby.svg?branch=master)](http://inch-ci.org/github/kiik-payments/kiik-ruby)
+# KiiK Ruby [![Build Status](https://snap-ci.com/kiik-payments/kiik_ruby/branch/master/build_image)](https://snap-ci.com/kiik-payments/kiik_ruby/branch/master) [![Inline docs](http://inch-ci.org/github/kiik-payments/kiik-ruby.svg?branch=master)](http://inch-ci.org/github/kiik-payments/kiik-ruby)
 
 Gem for bindings with Kiik API
 
