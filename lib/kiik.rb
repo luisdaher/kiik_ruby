@@ -9,7 +9,7 @@ require 'kiik/resource'
 require 'kiik/card'
 require 'kiik/customer'
 require 'kiik/charge'
-require 'kiik/compensation'
+require 'kiik/payment'
 require 'kiik/error'
 require 'kiik/paginated'
 

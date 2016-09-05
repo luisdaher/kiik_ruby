@@ -1,5 +1,5 @@
 module Kiik
-  class Compensation < Resource
+  class Payment < Resource
     include Kiik::Rest::GetAll
 
     attr_accessor :status, :received_at, :history_type, :expected_compensation_date,
