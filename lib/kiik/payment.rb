@@ -2,8 +2,7 @@ module Kiik
   class Payment < Resource
     include Kiik::Rest::GetAll
 
-    attr_accessor :status, :received_at, :history_type, :expected_compensation_date,
-      :compensated_at, :charge_id, :amount, :amount_raw, :aditional_info, :total
+    attr_accessor :status, :expected_compensation, :compensated_at, :amount, :amount_raw, :total
 
     class << self
       def consolidated(customer = nil, start_date = nil, end_date = nil)
@@ -39,14 +38,10 @@ module Kiik
     def to_json
       super.merge!(super([
         :status,
-        :received_at,
-        :history_type,
-        :expected_compensation_date,
+        :expected_compensation,
         :compensated_at,
-        :charge_id,
         :amount,
         :amount_raw,
-        :aditional_info
       ]))
     end
   end
