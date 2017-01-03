@@ -3,7 +3,7 @@ module Kiik
     include Kiik::Rest::GetAll
 
     attr_accessor :status, :received_at, :history_type, :expected_compensation_date,
-      :compensated_at, :charge_id, :amount, :aditional_info, :total
+      :compensated_at, :charge_id, :amount, :amount_raw, :aditional_info, :total
 
     class << self
       def consolidated(customer = nil, start_date = nil, end_date = nil)
@@ -45,6 +45,7 @@ module Kiik
         :compensated_at,
         :charge_id,
         :amount,
+        :amount_raw,
         :aditional_info
       ]))
     end
