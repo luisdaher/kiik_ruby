@@ -18,7 +18,7 @@ module Kiik
   path = File.expand_path(relative_config, ENV["BUNDLE_GEMFILE"])
 
   unless File.exist? path
-    puts "Warning: Config file not exist (#{path}), try `rake kiik:config`, using DEMO by default"
+    puts "Warning: Config file doesn't exist (#{path}), try `rake kiik:config`, using DEMO by default"
     path = File.expand_path("../#{relative_config}", __FILE__)
   end
 
