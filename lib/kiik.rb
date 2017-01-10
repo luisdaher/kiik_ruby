@@ -21,7 +21,7 @@ module Kiik
   env = ENV['KIIK_ENV'] || 'development'
 
   if File.exist? path
-    config = YAML.load_file(path)
+    config = YAML.load(ERB.new(File.read(path)).result)
     @host = config[env]['host']
     @version = config[env]['version']
     @api_key = config[env]['api_key']
