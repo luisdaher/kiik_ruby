@@ -27,7 +27,9 @@ module Kiik
     @version = config[env]['version']
     @api_key = config[env]['api_key']
   else
-    puts "Warning: Config file doesn't exist (#{path}), try `rake kiik:config`"
+    puts "Warning: Config file doesn't exist at #{path}"
+    puts "If you're using Rails, try running rails g kiik:install"
+    #  try `rake kiik:config`"
   end
 
   class << self
