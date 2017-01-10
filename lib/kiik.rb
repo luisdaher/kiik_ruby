@@ -12,11 +12,10 @@ require 'kiik/charge'
 require 'kiik/payment'
 require 'kiik/error'
 require 'kiik/paginated'
+require 'kiik/railtie' if defined?(Rails)
 
 # Module that encapsulates Kiik's object representations
 module Kiik
-  require 'kiik/railtie' if defined?(Rails)
-
   relative_config = './config/kiik.yml'
   path = File.expand_path(relative_config, ENV['BUNDLE_GEMFILE'])
 

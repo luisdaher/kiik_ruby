@@ -5,7 +5,7 @@ module Kiik
     railtie_name :kiik
 
     rake_tasks do
-      load "tasks/kiik.rake"
+      load 'tasks/kiik.rake'
     end
   end
 end
