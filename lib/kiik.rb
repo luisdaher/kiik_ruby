@@ -15,6 +15,8 @@ require 'kiik/paginated'
 
 # Module that encapsulates Kiik's object representations
 module Kiik
+  require 'kiik/railtie' if defined?(Rails)
+
   relative_config = './config/kiik.yml'
   path = File.expand_path(relative_config, ENV['BUNDLE_GEMFILE'])
 
