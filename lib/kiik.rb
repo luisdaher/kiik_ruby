@@ -16,7 +16,7 @@ require 'kiik/paginated'
 # Module that encapsulates Kiik's object representations
 module Kiik
   relative_config = './config/kiik.yml'
-  path = File.expand_path(relative_config, ENV['BUNDLE_GEMFILE'])
+  path = File.expand_path(relative_config)
 
   env = ENV['KIIK_ENV'] || 'development'
 
