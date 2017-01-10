@@ -1,6 +1,6 @@
 module Kiik
   class Payment < Resource
-    include Kiik::Rest::GetAll
+    include Kiik::Rest::List
 
     attr_accessor :status, :expected_compensation, :compensated_at, :amount, :amount_raw, :total
 
@@ -13,7 +13,7 @@ module Kiik
         params << "end_date=#{end_date.strftime('%Y-%m-%d %H:%M:%S')}" if end_date
         url += "?#{params.join('&')}" if params.length
         result = request(url, {}, :GET, {})
-        raise result if result.kind_of? StandardError
+        raise result if result.is_a? StandardError
         result.total
       end
 
@@ -26,7 +26,7 @@ module Kiik
         parameters << "page_size=#{params[:page_size]}" if params[:page_size]
         url += "?#{parameters.join('&')}" if parameters.length
         result = request(url, {}, :GET, {})
-        raise result if result.kind_of? StandardError
+        raise result if result.is_a? StandardError
         result
       end
     end

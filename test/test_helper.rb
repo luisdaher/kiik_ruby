@@ -5,11 +5,18 @@ require 'shoulda'
 require 'webmock/test_unit'
 require File.expand_path('../test_mock.rb', __FILE__)
 
-class Test::Unit::TestCase
-  include Mocha
-  include Kiik::TestMock
+module Test
+  module Unit
+    # Unit Test configurations
+    class TestCase
+      include Mocha
+      include Kiik::TestMock
 
-  setup do
+      setup do
+        Kiik.host = 'http://example.com'
+        Kiik.version = 'TEST_VERSION'
+        Kiik.api_key = 'TEST_KEY'
+      end
+    end
   end
-
 end

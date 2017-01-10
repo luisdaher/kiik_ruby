@@ -1,15 +1,13 @@
 module Kiik
   module Rest
-    module GetAll
+    module List
       class << self
-
         def included(base)
           base.extend(ClassMethods)
         end
-
       end
-      def get_all
-        result = self.class.get_all(self.to_json)
+      def list
+        result = self.class.list(to_json)
         raise result if result.instance_of? StandardError
 
         if result.instance_of? KiikError
@@ -22,22 +20,18 @@ module Kiik
       end
 
       module ClassMethods
-
-        def get_all!(params={}, header={})
-          begin
-            get_all(params, header)
-          rescue KiikError => e
-            build(params, e)
-          rescue StandardError => e
-            e
-          end
+        def list!(params = {}, header = {})
+          list(params, header)
+        rescue KiikError => e
+          build(params, e)
+        rescue StandardError => e
+          e
         end
 
-        def get_all(params={}, header={})
-
+        def list(params = {}, header = {})
           result = request(nil, params, :GET, header)
 
-          raise result if result.kind_of? StandardError
+          raise result if result.is_a? StandardError
           result
         end
       end
