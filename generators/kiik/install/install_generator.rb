@@ -10,7 +10,7 @@ module Kiik
         )
       end
 
-      def copy_config_file
+      def copy_config_files
         template 'config/kiik.yml'
       end
     end
