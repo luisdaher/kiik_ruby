@@ -20,15 +20,20 @@ module Kiik
 
   env = ENV['KIIK_ENV'] || 'development'
 
-  if File.exist? path
+  if ENV['KIIK_KEY'] && ENV['KIIK_HOST'] && ENV['KIIK_VERSION']
+    @host = config['KIIK_HOST']
+    @version = config['KIIK_VERSION']
+    @api_key = config['KIIK_KEY']
+  elsif File.exist? path
     config = YAML.load(ERB.new(File.read(path)).result)
     @host = config[env]['host']
     @version = config[env]['version']
     @api_key = config[env]['api_key']
   else
     puts "Warning: Config file doesn't exist at #{path}"
-    puts "If you're using Rails, try running `rails g kiik:install`"
-    #  try `rake kiik:config`"
+    puts "If you're using Rails, try running `rails g kiik:install`,"
+    puts 'or please assign them as environment variables.'
+    puts '(see README.md for further details)'
   end
 
   class << self
