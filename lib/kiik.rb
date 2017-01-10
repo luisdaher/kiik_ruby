@@ -12,7 +12,6 @@ require 'kiik/charge'
 require 'kiik/payment'
 require 'kiik/error'
 require 'kiik/paginated'
-require 'kiik/railtie' if defined?(Rails)
 
 # Module that encapsulates Kiik's object representations
 module Kiik
@@ -28,7 +27,7 @@ module Kiik
     @api_key = config[env]['api_key']
   else
     puts "Warning: Config file doesn't exist at #{path}"
-    puts "If you're using Rails, try running rails g kiik:install"
+    puts "If you're using Rails, try running `rails g kiik:install`"
     #  try `rake kiik:config`"
   end
 
