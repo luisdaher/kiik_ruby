@@ -13,7 +13,7 @@ module Test
       include Kiik::TestMock
 
       setup do
-        Kiik.host = 'http://example.com'
+        Kiik.environment = 'test'
         Kiik.version = 'TEST_VERSION'
         Kiik.api_key = 'TEST_KEY'
       end

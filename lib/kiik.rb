@@ -19,7 +19,7 @@ module Kiik
     attr_accessor :api_key, :version, :environment
 
     def host
-      @environment == 'production' ? 'https://api.kiik.com' : 'https://demo.kiik.com'
+      @environment == 'production' ? 'http://api.kiik.com' : 'http://demo.kiik.com'
     end
   end
 end
