@@ -18,17 +18,14 @@ source 'https://rubygems.org'
 gem 'kiik'
 ```
 
-Tasks
------
 ### Configuration
-Kiik gem use config file `config/kiik.yml` in order to take api_key
-To create this file in your project use:
+Kiik gem uses environment variables. They are:
 
-```
-rails g kiik:config
-```
+- `KIIK_ENV`: the chosen environment. Valid values are `production`, `staging` and `development`
+- `KIIK_VERSION`: the chosen API version. Default value is `0.3`.
+- `KIIK_KEY`: the API key. A valid value for testing on `development` is `B31DCE74-E768-43ED-86DA-85501612548F`
 
-Don't forget to replace `api_key` with your key
+A good and safe way to assign those variables in development environments is by using [dotenv](https://github.com/bkeepers/dotenv).
 
 ### Usage
 
@@ -36,7 +33,3 @@ Don't forget to replace `api_key` with your key
 #Create customer
 customer = Kiik::Customer.create({name: "User name", email: "user@email.com"})
 ```
-
-### Production
-
-For production env, don't forget to set `KIIK_ENV` to `production`, that way, our gem will read the `kiik.yml` file corretly.

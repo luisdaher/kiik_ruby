@@ -15,25 +15,18 @@ require 'kiik/paginated'
 
 # Module that encapsulates Kiik's object representations
 module Kiik
-  relative_config = './config/kiik.yml'
-  path = File.expand_path(relative_config)
+  @host = if ENV['KIIK_ENV'] == 'production'
+            'https://api.kiik.com'
+          else
+            'https://demo.kiik.com'
+          end
 
-  env = ENV['KIIK_ENV'] || 'development'
+  @version = ENV['KIIK_VERSION']
+  @api_key = ENV['KIIK_KEY']
 
-  if ENV['KIIK_KEY'] && ENV['KIIK_HOST'] && ENV['KIIK_VERSION']
-    @host = ENV['KIIK_HOST']
-    @version = ENV['KIIK_VERSION']
-    @api_key = ENV['KIIK_KEY']
-  elsif File.exist? path
-    config = YAML.load(ERB.new(File.read(path)).result)
-    @host = config[env]['host']
-    @version = config[env]['version']
-    @api_key = config[env]['api_key']
-  else
-    puts "Warning: Config file doesn't exist at #{path}"
-    puts "If you're using Rails, try running `rails g kiik:install`,"
-    puts 'or please assign them as environment variables.'
-    puts '(see README.md for further details)'
+  unless @host && @version && @api_key
+    puts "Warning: environment variables 'KIIK_KEY', 'KIIK_ENV' and 'KIIK_VERSION' aren't set yet."
+    puts 'Please assign them in order for Kiik integration to work.'
   end
 
   class << self
