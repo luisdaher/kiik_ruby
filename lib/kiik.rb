@@ -25,7 +25,7 @@ module Kiik
   end
 
   class << self
-    attr_accessor :api_key, :host, :version
+    attr_accessor :api_key, :host, :version, :environment
 
     def host
       @environment == 'production' ? 'https://api.kiik.com' : 'https://demo.kiik.com'
