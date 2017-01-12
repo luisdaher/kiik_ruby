@@ -19,13 +19,14 @@ gem 'kiik'
 ```
 
 ### Configuration
-Kiik gem uses environment variables. They are:
+From the terminal, run the following command:
+```shellscript
+rails g kiik:install
+```
+A configuration file will be created inside `config/initializers` folder.
+Change the `environment`, `version` and `api_key`  accordingly.
 
-- `KIIK_ENV`: the chosen environment. Valid values are `production`, `staging` and `development`
-- `KIIK_VERSION`: the chosen API version. Default value is `0.3`.
-- `KIIK_KEY`: the API key. A valid value for testing on `development` is `B31DCE74-E768-43ED-86DA-85501612548F`
-
-A good and safe way to assign those variables in development environments is by using [dotenv](https://github.com/bkeepers/dotenv).
+*Pro tip:* A good and safe way to assign variables in development environments is by using [dotenv](https://github.com/bkeepers/dotenv).
 
 ### Usage
 
