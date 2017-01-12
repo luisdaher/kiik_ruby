@@ -15,12 +15,7 @@ require 'kiik/paginated'
 
 # Module that encapsulates Kiik's object representations
 module Kiik
-  if ENV['KIIK_ENV'] == 'production'
-    @host = 'https://api.kiik.com'
-  else
-    @host = 'https://demo.kiik.com'
-  end
-
+  @environment = ENV['KIIK_ENV']
   @version = ENV['KIIK_VERSION']
   @api_key = ENV['KIIK_KEY']
 
@@ -31,5 +26,9 @@ module Kiik
 
   class << self
     attr_accessor :api_key, :host, :version
+
+    def host
+      @environment == 'production' ? 'https://api.kiik.com' : 'https://demo.kiik.com'
+    end
   end
 end
