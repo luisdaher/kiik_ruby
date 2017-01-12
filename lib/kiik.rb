@@ -15,14 +15,12 @@ require 'kiik/paginated'
 
 # Module that encapsulates Kiik's object representations
 module Kiik
-  @host = if ENV['KIIK_ENV'] == 'production'
-            'https://api.kiik.com'
-          else
-            'https://demo.kiik.com'
-          end
-  puts "#{ENV['KIIK_ENV']}"
-  puts "#{@host}"
-  
+  if ENV['KIIK_ENV'] == 'production'
+    @host = 'https://api.kiik.com'
+  else
+    @host = 'https://demo.kiik.com'
+  end
+
   @version = ENV['KIIK_VERSION']
   @api_key = ENV['KIIK_KEY']
 
