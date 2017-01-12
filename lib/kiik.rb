@@ -20,7 +20,9 @@ module Kiik
           else
             'https://demo.kiik.com'
           end
-
+  puts "#{ENV['KIIK_ENV']}"
+  puts "#{@host}"
+  
   @version = ENV['KIIK_VERSION']
   @api_key = ENV['KIIK_KEY']
 
