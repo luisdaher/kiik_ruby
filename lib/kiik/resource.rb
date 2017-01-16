@@ -40,9 +40,6 @@ module Kiik
         options = opts(header).merge(body: JSON.generate(params))
         url_abs = path.nil? ? url : "#{url}/#{path}"
 
-        puts "URL: #{url_abs}"
-        puts "OPTIONS: #{options}"
-        
         response = case method
                    when :GET
                      get(url_abs, options)

@@ -3,7 +3,6 @@ module Kiik
   module TestMock
     def request(url, params = {}, method = :any)
       host = Kiik.host.gsub(%r{^https:\/\/}, '').gsub(%r{^http:\/\/}, '')
-      puts host
       headers = { accept_version: Kiik.version,
                   content_type: 'application/json' }
       stub_request(method, "#{Kiik.api_key}:@#{host}/#{url}")
