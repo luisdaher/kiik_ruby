@@ -33,6 +33,38 @@ rails g kiik:install
 This command will create two files: `config/initializers/kiik.rb` and
 `config/kiik.yml`, containing the default settings for the app to run.
 
+#### Non-Rails Apps
+
+It is recommended to create a YAML configuration file and a Ruby initializer file. The initializer must be required inside the main application ruby file.
+
+```yaml
+# kiik.yml
+development:
+  api_key:  payos_test
+  host:     http://localhost:8800
+  version:  '0.3'
+staging:
+  api_key:  B31DCE74-E768-43ED-86DA-85501612548F
+  host:     https://demo.kiik.com
+  version:  '0.3'
+production:
+  api_key:  B31DCE74-E768-43ED-86DA-85501612548F
+  host:     https://api.kiik.com
+  version:  '0.3'
+```
+
+```ruby
+# kiik.rb
+KIIK_ENV = ENV['KIIK_ENV'] || 'development'
+KIIK_CONFIG = YAML.load_file('./kiik.yml')[KIIK_ENV]
+
+Kiik.setup do |config|
+  config.host = KIIK_CONFIG['host']
+  config.api_key = KIIK_CONFIG['api_key']
+  config.version = KIIK_CONFIG['version']
+end
+```
+
 *Important:* Don't forget to change `api_key` to your key.
 
 ### Usage
