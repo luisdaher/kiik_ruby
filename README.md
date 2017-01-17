@@ -21,14 +21,19 @@ gem 'kiik'
 Tasks
 -----
 ### Configuration
-Kiik gem uses config file `config/kiik.yml` for take api_key
-For create this file in your project use task:
+
+#### Rails Apps
+
+In order to generate config files, run:
 
 ```
-rake kiik:config
+rails g kiik:install
 ```
 
-Don't forget to change `api_key` to your key
+This command will create two files: `config/initializers/kiik.rb` and
+`config/kiik.yml`, containing the default settings for the app to run.
+
+*Important:* Don't forget to change `api_key` to your key.
 
 ### Usage
 
@@ -39,4 +44,4 @@ customer = Kiik::Customer.create({name: "User name", email: "user@email.com"})
 
 ### Production
 
-For production env, don't forget to set `KIIK_ENV` to `production`, that way, our gem will read the `kiik.yml` file corretly.
+For production env, don't forget to set `KIIK_ENV` to `production`, that way, our gem will read the `kiik.yml` file correctly.

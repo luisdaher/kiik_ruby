@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    kiik (0.2.1)
+    kiik (0.3.0)
+      httparty (>= 0.13.7)
 
 GEM
   remote: https://rubygems.org/
@@ -47,7 +48,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  httparty (>= 0.13.7)
   kiik!
   mocha (~> 0.13)
   rake (~> 10.4)
@@ -56,4 +56,4 @@ DEPENDENCIES
   webmock (~> 1.21)
 
 BUNDLED WITH
-   1.11.2
+   1.12.4
