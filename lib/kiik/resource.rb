@@ -11,14 +11,14 @@ module Kiik
       end
 
       def url
-        "#{Kiik.host}/#{Kiik::Util.underscore(class_name)}s"
+        "#{Kiik.configuration.host}/#{Kiik::Util.underscore(class_name)}s"
       end
 
       def opts(headers={})
         {
-          basic_auth: {username: Kiik.api_key, password: ''},
+          basic_auth: {username: Kiik.configuration.api_key, password: ''},
           headers: {
-            "Accept-Version" => Kiik.version,
+            "Accept-Version" => Kiik.configuration.version,
             "Content-Type" => 'application/json'
           }.merge(headers)
         }

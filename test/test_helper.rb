@@ -10,6 +10,10 @@ class Test::Unit::TestCase
   include Kiik::TestMock
 
   setup do
+    Kiik.setup do |config|
+      config.api_key = '123'
+      config.version = '0.3'
+      config.host = 'http://api.kiik.com'
+    end
   end
-
 end

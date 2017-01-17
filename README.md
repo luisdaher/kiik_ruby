@@ -21,7 +21,7 @@ gem 'kiik'
 Tasks
 -----
 ### Configuration
-Kiik gem use config file `config/kiik.yml` for take api_key
+Kiik gem uses config file `config/kiik.yml` for take api_key
 For create this file in your project use task:
 
 ```
@@ -30,7 +30,7 @@ rake kiik:config
 
 Don't forget to change `api_key` to your key
 
-### Use
+### Usage
 
 ```ruby
 #Create customer
